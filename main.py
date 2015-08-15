@@ -37,9 +37,12 @@ class Score(ndb.Model):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-	self.response.headers['Content-Type']='text/plain'
-	self.response.write('''Welcome to the scoreboard!
-	This page is supposed to be the API doc.''')
+	if self.request.params.has_key("echostr"):
+	    self.response.write(self.request.params.get("echostr"))
+	else:
+	    self.response.headers['Content-Type']='text/plain'
+	    self.response.write('''Welcome to Ardenwood Coyote!
+		    This page is supposed to be the API doc.''')
 
 
 ACCESS_TOKEN_CACHE = {}
@@ -197,7 +200,6 @@ class ScoreHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/score', ScoreHandler),
 ], debug=True)
 
 
