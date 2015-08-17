@@ -5,13 +5,13 @@ import logging
 
 LOG_FILENAME="server.log"
 logging.basicConfig(filename=LOG_FILENAME,
-	level=logging.DEBUG,
+	level=logging.INFO,
 	)
 
 class HelloWebapp2(webapp2.RequestHandler):
     def get(self):
 	logging.info("Incoming Request: {0}, remote IP: {1}".format(
-	    self.request.url,
+	    self.request.path_qs,
 	    self.request.remote_addr
 	    ))
         if self.request.params.has_key("echostr"):
